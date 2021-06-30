@@ -11,10 +11,20 @@ export class HomePage implements OnInit {
   constructor(private iab: InAppBrowser, private platform: Platform) {}
 
   async ngOnInit() {
+    const inAppBrowserOpts: any = {
+      hardwareback: 'no',
+      closebuttoncaption: 'x',
+      toolbar: 'foo',
+      location: 'bar',
+    };
+    inAppBrowserOpts.enableViewportScale = 'yes';
+    inAppBrowserOpts.disallowoverscroll = 'yes';
+
     await this.platform.ready();
     const browser = this.iab.create(
       'https://www.parsippanysbestpizza.com/',
-      '_blank'
+      '_blank',
+      inAppBrowserOpts
     );
     browser.show();
   }
